@@ -41,10 +41,17 @@ if (isset($_POST['project'])) {
 	}
 
 } elseif (isset($_POST['phase'])) {
-	$postValues = array($_SESSION['projectID'], $_POST['phase_id'], $_POST['next_phase'], $_POST['notes']);
+	// check to see if the bucket checkmark has been checked (or unchecked)
+	if (isset($_POST['bucket'])) {
+		$bucket="1";
+	} else {
+		$bucket="0";
+	}
 
-	$sql = "INSERT INTO `pgmo`.`phase_gate` (`id`, `proj_id`, `phase_id`, `next_phase`, `notes`, `updated`) 
-	VALUES (NULL, '$postValues[0]', '$postValues[1]', '$postValues[2]', '$postValues[3]', CURRENT_TIMESTAMP)";
+	$postValues = array($_SESSION['projectID'], $_POST['phase_id'], $_POST['next_phase'], $_POST['notes'], $bucket);
+
+	$sql = "INSERT INTO `pgmo`.`phase_gate` (`id`, `proj_id`, `phase_id`, `next_phase`, `notes`, `bucket`, `updated`) 
+	VALUES (NULL, '$postValues[0]', '$postValues[1]', '$postValues[2]', '$postValues[3]', '$postValues[4]',CURRENT_TIMESTAMP)";
 
 	$result=$db->query($sql);
 	if($result===true) {
