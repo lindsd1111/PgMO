@@ -58,13 +58,15 @@
             }
             echo '<p class="' . $color . '">&nbsp;Estimated Finish: &nbsp;' . substr($scheduleResults[$i]['est_finish'], 0, -9) . '</p>';
             // change background color based on PM status
-            if ($statusResults[$i]['pm_status']==1 || $statusResults[$i]['pm_status']==2) {
+            if ($statusResults[$i]['pm_status']==1) {
               $color="red";
-            } elseif ($statusResults[$i]['pm_status']==3 || $statusResults[$i]['pm_status']==4) {
+            } elseif ($statusResults[$i]['pm_status']==2 ) {
               $color="orange";
-            } elseif ($statusResults[$i]['pm_status']==5 || $statusResults[$i]['pm_status']==6) {
+            } elseif ($statusResults[$i]['pm_status']==3) {
               $color="yellow";
-            } elseif ($statusResults[$i]['pm_status']==7 || $statusResults[$i]['pm_status']==8) {
+            } elseif ($statusResults[$i]['pm_status']==4) {
+              $color="chartreuse";
+            } elseif ($statusResults[$i]['pm_status']==5) {
               $color="green";
             } else {
               $color="grayText";
@@ -73,13 +75,15 @@
             echo '<p class="' . $color . '">&nbsp;PM Status Score: ' . $statusResults[$i]['pm_status'] . '</p>';
             
             // change background color based on Stakeholder status
-            if ($statusResults[$i]['stake_status']==1 || $statusResults[$i]['stake_status']==2) {
+            if ($statusResults[$i]['stake_status']==1) {
               $color="red";
-            } elseif ($statusResults[$i]['stake_status']==3 || $statusResults[$i]['stake_status']==4) {
+            } elseif ($statusResults[$i]['stake_status']==2) {
               $color="orange";
-            } elseif ($statusResults[$i]['stake_status']==5 || $statusResults[$i]['stake_status']==6) {
+            } elseif ($statusResults[$i]['stake_status']==3) {
               $color="yellow";
-            } elseif ($statusResults[$i]['stake_status']==7 || $statusResults[$i]['stake_status']==8) {
+            } elseif ($statusResults[$i]['stake_status']==4) {
+              $color="chartreuse";
+            } elseif ($statusResults[$i]['stake_status']==5) {
               $color="green";
             } else {
               $color="grayText";
@@ -87,18 +91,20 @@
             echo '<p class="' . $color . '">&nbsp;Stakeholder Status Score: ' . $statusResults[$i]['stake_status'] . '</p>';
 
            // change background color based on LCI status
-            if ($statusResults[$i]['lind_status']==1 || $statusResults[$i]['lind_status']==2) {
+            if ($statusResults[$i]['lind_status']==1) {
               $color="red";
-            } elseif ($statusResults[$i]['lind_status']==3 || $statusResults[$i]['lind_status']==4) {
+            } elseif ($statusResults[$i]['lind_status']==2) {
               $color="orange";
-            } elseif ($statusResults[$i]['lind_status']==5 || $statusResults[$i]['lind_status']==6) {
+            } elseif ($statusResults[$i]['lind_status']==3) {
               $color="yellow";
-            } elseif ($statusResults[$i]['lind_status']==7 || $statusResults[$i]['lind_status']==8) {
+            } elseif ($statusResults[$i]['lind_status']==4) {
+              $color="chartreuse";
+            } elseif ($statusResults[$i]['lind_status']==5) {
               $color="green";
             } else {
               $color="grayText";
             }
-            echo '<p class="' . $color . '">&nbsp;Lindstedt Confidence Index&trade;: ' . $statusResults[$i]['lind_status'] . '</p>';
+            echo '<p class="' . $color . '">&nbsp;Lindstedt Confidence Index: ' . $statusResults[$i]['lind_status'] . '</p>';
 
             echo '<p><em>Summary:</em><br>' . $statusResults[$i]['exec_sum'] . '</p>';
             // close divs
