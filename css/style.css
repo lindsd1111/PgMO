@@ -1,0 +1,89 @@
+body {
+  padding-top: 50px;
+}
+
+.red {
+	background: red;
+	color: white;
+}
+
+.orange {
+	background: orange;
+	color: white;
+}
+.yellow {
+	background: yellow;
+	
+}
+.green {
+	background: green;
+	color: white;
+}
+
+.grayText {
+	color: gray;
+}
+
+.icon {
+	color:green;
+}
+
+.table-hover {
+	font-size: 1.3em;
+}
+
+.rightBorder {
+	border-right: 1px solid black;
+}
+
+.leftBorder {
+	border-left: 1px solid black;
+}
+
+.mediumMargins {
+	margin: 25px;
+}
+
+.top-banner {
+	background: #736F6E;
+	color:white;
+}
+
+.table-bordered th {
+	font-size: 1.3em;
+	background: #E5E4E2;
+}
+
+.reports {
+	padding-left: 50px;
+}
+
+.reports h4 {
+	line-height: 30px;
+}
+
+#floatRight {
+	float: right;
+}
+
+.cards h3 {
+	margin: 0px 0px 15px 0px;
+	padding: 10px;
+	background: #3D3C3A;
+	color: white;
+}
+
+.cards h4 {
+	border-bottom: 1px dashed black;
+	padding-bottom: 5px;
+	margin-bottom: 15px;
+}
+
+.cards p {
+	font-size: 1.1em;
+	padding-bottom: 0px;
+}
+
+.category p {
+	font-size: 1.1em;
+}
