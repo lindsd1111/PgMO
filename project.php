@@ -13,6 +13,10 @@ if ($_POST) {
 // get the most recent information about this project from the DB
 include 'includes/get_project_info.inc.php'; 
 
+// need to create some colors for the status indicators
+$statusColors = array('<option>', '<option class="red">', '<option class="orange">', '<option class="yellow">', '<option class="chartreuse">', '<option class="green">');
+$statusSelectedColors = array('<option selected>', '<option selected class="red">', '<option selected class="orange">', '<option selected class="yellow">', '<option selected class="chartreuse">', '<option selected class="green">');
+$labelColors = array('', 'class="redText"', 'class="orangeText"', 'class="yellowText"', 'class="chartreuseText"', 'class="greenText"');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -145,7 +149,6 @@ include 'includes/get_project_info.inc.php';
               <!-- Note: This is a calculated field that does not pull or write to the DB -->
               <!-- Reminder: We check to make sure that the current phase is not Archive else we'd get an error here-->
               <input readonly type="text" class="form-control" name="next_phase_name" id="next_phase_name" value="<?php $i = $phaseGateArray['phase_id']+1; if ($i<9) {echo $eachPhaseName[$i];}; ?>">
-              
             </div>
             <div class="form-group">
               <label for="next_phase_date">Next Phase Approval Submission Date</label>
@@ -154,6 +157,11 @@ include 'includes/get_project_info.inc.php';
             <div class="form-group">
               <label for="notes">Tracking Notes</label>
               <textarea class="form-control" rows="4" name="notes" id="notes"><?php echo $phaseGateArray['notes']; ?></textarea>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="bucket" id="bucket" value="1" <?php if ($phaseGateArray['bucket']==1) echo ' checked="checked"' ?>> <strong>Timekeeping Bucket Created</strong>
+              </label>
             </div>
             <!-- Important: We do NOT want to write this field back to the database.  We only want to display the most recent update.-->
             <div class="form-group">
@@ -260,48 +268,90 @@ include 'includes/get_project_info.inc.php';
           <hr>
           <form id="status" method="post" action="">
             <div class="form-group">
-              <label for="pm_status"><?php echo $array['pm']; ?> Status Score</label>
+              <?php
+                // change the color of the label based on the color of the current status (if there is a current status)
+                if (isset($statusArray['pm_status'])) {
+                  $c = $statusArray['pm_status'];
+                } else {
+                  $c = 0;
+                }
+                $labelColor = $labelColors[$c];
+                echo '<label for="pm_status" ' . $labelColor . '>' . $array['pm'] . ' Status Score</label>';
+              ?>
               <select class="form-control" name="pm_status" id="pm_status">
                 <?php 
                   // figure out the current phase choice (it's an integer
                     $currentStatus = $statusArray['pm_status'];
-                    for ($i=1; $i <= 8; $i++) {
-                      if ($currentStatus == $i) {
-                        echo "<option selected>" . $statusArray['pm_status'] . "</option>";
-                      } else {
-                        echo "<option>" . $i . "</option>";
-                      } // end if
-                    } // end for
+                    for ($i=1; $i <= 5; $i++) {
+                    // determine which background color to use in the dropdown
+                    $colorStyle = $statusColors[$i];
+                    // determine which background color to use in the selected item in the dropdown
+                    $c = $statusArray['pm_status'];
+                    $colorSelectedStyle = $statusSelectedColors[$c];
+                    if ($currentStatus == $i) {
+                      echo $colorSelectedStyle . $statusArray['pm_status'] . '</option>';
+                    } else {
+                      echo $colorStyle . $i . "</option>";
+                    } // end if
+                  } // end for
                 ?>
               </select>
             </div>
             <div class="form-group">
-              <label for="stake_status">Stakeholder Status Score</label>
+              <?php
+                // change the color of the label based on the color of the current status (if there is a current status)
+                if (isset($statusArray['stake_status'])) {
+                  $c = $statusArray['stake_status'];
+                } else {
+                  $c = 0;
+                }
+                $labelColor = $labelColors[$c];
+                echo '<label for="stake_status" ' . $labelColor . '>Stakeholder Status Score</label>';
+              ?>
               <select class="form-control" name="stake_status" id="stake_status">
                 <?php 
                   // figure out the current phase choice (it's an integer)
                   $currentStatus = $statusArray['stake_status'];
-                  for ($i=1; $i <= 8; $i++) {
+                  for ($i=1; $i <= 5; $i++) {
+                    // determine which background color to use in the dropdown
+                    $colorStyle = $statusColors[$i];
+                    // determine which background color to use in the selected item in the dropdown
+                    $c = $statusArray['stake_status'];
+                    $colorSelectedStyle = $statusSelectedColors[$c];
                     if ($currentStatus == $i) {
-                      echo "<option selected>" . $statusArray['stake_status'] . "</option>";
+                      echo $colorSelectedStyle . $statusArray['stake_status'] . '</option>';
                     } else {
-                      echo "<option>" . $i . "</option>";
+                      echo $colorStyle . $i . "</option>";
                     } // end if
                   } // end for
                 ?>
               </select>
             </div>
               <div class="form-group">
-              <label for="lind_status">Lindstedt Confidence Index (LCI)</label>
+              <?php
+                // change the color of the label based on the color of the current status (if there is a current status)
+                if (isset($statusArray['lind_status'])) {
+                  $c = $statusArray['lind_status'];
+                } else {
+                  $c = 0;
+                }
+                $labelColor = $labelColors[$c];
+                echo '<label for="lind_status" ' . $labelColor . '>Lindstedt Confidence Index (LCI)</label>';
+              ?>
               <select class="form-control" name="lind_status" id="lind_status">
                 <?php 
                   // figure out the current phase choice (it's an integer)
                   $currentStatus = $statusArray['lind_status'];
-                  for ($i=1; $i <= 8; $i++) {
+                  for ($i=1; $i <= 5; $i++) {
+                    // determine which background color to use in the dropdown
+                    $colorStyle = $statusColors[$i];
+                    // determine which background color to use in the selected item in the dropdown
+                    $c = $statusArray['lind_status'];
+                    $colorSelectedStyle = $statusSelectedColors[$c];
                     if ($currentStatus == $i) {
-                      echo "<option selected>" . $statusArray['lind_status'] . "</option>";
+                      echo $colorSelectedStyle . $statusArray['lind_status'] . '</option>';
                     } else {
-                      echo "<option>" . $i . "</option>";
+                      echo $colorStyle . $i . "</option>";
                     } // end if
                   } // end for
                 ?>
